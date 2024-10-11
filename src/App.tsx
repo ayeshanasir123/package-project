@@ -1,37 +1,26 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-// import './App.css'
-import { FullApp } from '@ayeshanasir123/invoice-repo'
+// App.tsx
+import React from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { MainHeader } from '@99Technologies-ai/invoice';
+import AppRoutes from './routes';
 
 function App() {
-  // const [count, setCount] = useState(0)
+  const navigate = useNavigate();
+  const location = useLocation(); // To get the current route
+
+  const handleView = () => {
+    navigate('/invoices');
+  };
 
   return (
     <>
-    <FullApp/>
-      {/* <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p> */}
+      {/* Render the MainHeader if not on the login page */}
+      {!(location.pathname === '/' || location.pathname === '/login' || location.pathname === '/signup') && <MainHeader onViewInvoices={handleView} />}
+
+      {/* App Routes */}
+      <AppRoutes />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
